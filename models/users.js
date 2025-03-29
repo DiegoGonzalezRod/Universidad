@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
     code: Number,
     intentos: Number,
 
-    // ✅ status en vez de estado
+   
     status: {
       type: String,
       enum: ['pending', 'validated'],
