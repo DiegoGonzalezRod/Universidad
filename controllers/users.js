@@ -80,14 +80,8 @@ const validateEmailCode = async (req, res) => {
   try {
     const { code } = req.body;
 
-    // ✅ Releer el usuario desde la base de datos
     const user = await User.findById(req.user._id);
 
-    console.log("🧑 Usuario autenticado desde token:", user.email);
-    console.log("🆔 ID del token:", user._id);
-    console.log("🔐 Código guardado en DB:", user.code);
-    console.log("📝 Código recibido:", code);
-    console.log("🔍 Estado del usuario:", user.status);
 
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
@@ -100,15 +94,76 @@ const validateEmailCode = async (req, res) => {
     user.status = 'validated';
     await user.save();
 
-    console.log("✅ Nuevo estado:", user.status);
+    
 
     return res.status(200).json({ message: "Email verificado correctamente" });
   } catch (error) {
-    console.log("❌ Error en validación:", error);
+    console.log(" Error en validación:", error);
     return res.status(500).json({ message: "Error interno" });
+  }
+};
+
+const updateUserPersonalData = async (req, res) => {
+  try{
+    const{name, apellidos,nif} = req.body;
+
+    if(!name || !apellidos || !nif) {
+      return res.status(400).json({ message: "Faltan Campos Obligatorios" });
+    }
+
+     // Aquí podrías validar el formato del NIF si querés
+     req.user.name = name;
+     req.user.apellidos = apellidos;
+     req.user.nif = nif;
+ 
+     await req.user.save();
+ 
+     res.status(200).json({ message: "Datos personales actualizados" });
+   } catch (err) {
+     console.error(" Error en onboarding personal:", err);
+     res.status(500).json({ message: "Error interno" });
+   }
+ };
+
+ const updateUserCompanyData = async (req, res) => {
+  try {
+    const { companyName, cif, address, phone, isFreelance } = req.body;
+
+    // 🔍 Ver exactamente qué llega
+    console.log("⚠️ BODY recibido:", req.body);
+    console.log("companyName:", companyName);
+    console.log("cif:", cif);
+    console.log("address:", address);
+    console.log("phone:", phone);
+
+    if (!companyName || !cif || !address || !phone) {
+      console.log("❌ Faltan Campos Obligatorios");
+      return res.status(400).json({ message: "Faltan Campos Obligatorios" });
+    }
+
+    req.user.company = isFreelance ? {
+      companyName: req.user.name + " " + (req.user.apellidos || ""),
+      cif: req.user.nif,
+      address,
+      phone,
+      isFreelance: true
+    } : {
+      companyName,
+      cif,
+      address,
+      phone,
+      isFreelance: false
+    };
+
+    await req.user.save();
+
+    res.status(200).json({ message: "Datos de empresa actualizados" });
+  } catch (err) {
+    console.error("❌ Error en onboarding empresa:", err);
+    res.status(500).json({ message: "Error interno" });
   }
 };
 
 
 
-module.exports = {createItem, userLogin, validateEmailCode}
+module.exports = {createItem, userLogin, validateEmailCode,updateUserPersonalData,updateUserCompanyData}

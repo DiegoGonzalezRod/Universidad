@@ -14,8 +14,7 @@ const authMiddleware = async (req, res, next) => {
       return handleHttpError(res, "INVALID_TOKEN", 401);
     }
 
-    const user = await usersModel.findById(dataToken._id); // 🔥 importante
-
+    const user = await usersModel.findById(dataToken._id); 
    
 
     req.user = user; 

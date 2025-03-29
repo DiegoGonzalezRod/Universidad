@@ -6,13 +6,30 @@ const userSchema = new mongoose.Schema(
     code: Number,
     intentos: Number,
 
-   
+    // ✅ status en vez de estado
     status: {
       type: String,
       enum: ['pending', 'validated'],
       default: 'pending'
     },
-
+    apellidos: {
+      type: String,
+      default: ""
+    },
+    nif: {
+      type: String,
+      default: ""
+    },
+    company: {
+      companyName: String,
+      cif: String,
+      address: String,
+      phone: String,
+      isFreelance: {
+        type: Boolean,
+        default: false
+      }
+    } ,   
     email: {
       type: String,
       unique: true, 

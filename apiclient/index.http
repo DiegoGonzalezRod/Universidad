@@ -6,15 +6,15 @@ Content-Type: application/json
 
 {
 
-    "name": "diegogr2004",
+    "name": "juan",
     "code":"123456",
     "password": "123456789",
-    "email": "diegooglz22.GR2004@gmail.com"
+    "email": "jjjjglz.GR2004@gmail.com"
 }
 
 ### Validar email con código
 POST http://localhost:3096/api/users/validation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MDk0NzViOWJjMjViMGNkY2FmMWQiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI1OTk3NSwiZXhwIjoxNzQzMjY3MTc1fQ.6vftGnN9Ciea_ckW-W5k6UKymtwPTfQZXYfJEtx_CRM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MjMwZTdhYjRkMWIxOTA4NmRlZDkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI2NjU3NCwiZXhwIjoxNzQzMjczNzc0fQ.bc9FDRNsSrQTH1y_kPf03-FaZN8hXzWj2QAt9SzVgGY
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 {
    "password": "123456789",
-    "email": "diegooglz22.GR2004@gmail.com"
+    "email": "jjjjglz.GR2004@gmail.com"
 }
 
 ###
@@ -41,3 +41,28 @@ Content-Type: image/jpg
 
 < ./img.jpg
 --Boundry--
+
+
+###
+PATCH http://localhost:3096/api/users/onboardingUser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MjBjNWZiMTMyYzNmOGJjZWI1OTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI2NjAxNywiZXhwIjoxNzQzMjczMjE3fQ.Ldwh4iodtgHK5dlsIuqsFaulCIojx2nWg7qG-WyIWjg
+Content-Type: application/json
+
+{
+  "name": "Juna",
+  "apellidos": "Gonzale",
+  "nif": "12345678Z"
+}
+
+### PATCH - Onboarding empresa
+PATCH http://localhost:3096/api/users/onboardingCompany
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MjMwZTdhYjRkMWIxOTA4NmRlZDkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI2NjU5NCwiZXhwIjoxNzQzMjczNzk0fQ.Nc_m0h38vnQ7YpyPZaA8kWF0oRsz50U5PK7tSRsqvJE
+Content-Type: application/json
+
+{
+  "companyName": "Empresa S.L.",
+  "cif": "B12345678",
+  "address": "Calle Empresa 1, Madrid",
+  "phone": "912345678",
+  "isFreelance": true
+}
