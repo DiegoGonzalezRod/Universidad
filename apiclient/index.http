@@ -1,0 +1,32 @@
+
+
+
+POST  http://localhost:3096/api/users/register
+Content-Type: application/json
+
+{
+
+    "name": "diegogr2004",
+    "code":"123456",
+    "password": "123456789",
+    "email": "diego.GR2004@gmail.com"
+}
+
+### Validar email con código
+POST http://localhost:3096/api/users/validation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U3ZjBkNDdjZGFlMmE4ZWNkZWIxMDEiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNzQzMjUzNzE2LCJleHAiOjE3NDMyNjA5MTZ9.z7y-wi0dFPqv5xhPsAetxTwqp8agHY4utr8W0RmQEqI
+Content-Type: application/json
+
+{
+  "code": "123456"
+}
+
+
+###
+POST  http://localhost:3096/api/users/login
+Content-Type: application/json
+
+{
+   "password": "1234567489",
+    "email": "ew34223123222qwq323242q4@gmail.com" 
+}
