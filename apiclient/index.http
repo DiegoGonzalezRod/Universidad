@@ -6,15 +6,15 @@ Content-Type: application/json
 
 {
 
-    "name": "juan",
+    "name": "sofia",
     "code":"123456",
     "password": "123456789",
-    "email": "jjjj.GR2004@gmail.com"
+    "email": "kayarcas@gmail.com"
 }
 
 ### Validar email con código
 POST http://localhost:3096/api/users/validation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MjRkZThmYzA4NDkwZGY2M2RlODEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI2NzAzOCwiZXhwIjoxNzQzMjc0MjM4fQ.M30qaly1uPG1j0V__LBqFHu0NH1cBQMNw2Pwymnh4gc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5MjgwYjBkYmMyNTViYzIxZGYzMjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzMzMzM4NywiZXhwIjoxNzQzMzQwNTg3fQ.u8nM6dvbyii81g643_pi08pXxTzLOwbJ_boYnI1ou5A
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 {
    "password": "123456789",
-    "email": "jjjj.GR2004@gmail.com"
+    "email": "kayarcas@gmail.com"
 }
 
 ###
@@ -45,24 +45,34 @@ Content-Type: image/jpg
 
 ###
 PATCH http://localhost:3096/api/users/onboardingUser
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MjRkZThmYzA4NDkwZGY2M2RlODEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI2NzAzOCwiZXhwIjoxNzQzMjc0MjM4fQ.M30qaly1uPG1j0V__LBqFHu0NH1cBQMNw2Pwymnh4gc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5MjgwYjBkYmMyNTViYzIxZGYzMjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzMzMzM4NywiZXhwIjoxNzQzMzQwNTg3fQ.u8nM6dvbyii81g643_pi08pXxTzLOwbJ_boYnI1ou5A
 Content-Type: application/json
 
 {
-  "name": "Juna",
-  "apellidos": "Gonzale",
+  "name": "Maria del Carmer",
+  "apellidos": "Gonzalez Arcas",
   "nif": "12345678Z"
 }
 
 ### PATCH - Onboarding empresa
 PATCH http://localhost:3096/api/users/onboardingCompany
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U4MjRkZThmYzA4NDkwZGY2M2RlODEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI2NzAzOCwiZXhwIjoxNzQzMjc0MjM4fQ.M30qaly1uPG1j0V__LBqFHu0NH1cBQMNw2Pwymnh4gc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5MjgwYjBkYmMyNTViYzIxZGYzMjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzMzMzM4NywiZXhwIjoxNzQzMzQwNTg3fQ.u8nM6dvbyii81g643_pi08pXxTzLOwbJ_boYnI1ou5A
 Content-Type: application/json
 
 {
-  "companyName": "Empresa S.L.",
-  "cif": "B12345678",
+  "companyName": "Munich-RE",
+  "cif": "",
   "address": "Calle Empresa 1, Madrid",
   "phone": "912345678",
   "isFreelance": false
 }
+
+###
+GET http://localhost:3096/api/users/getUser HTTP/1.1
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5MjgwYjBkYmMyNTViYzIxZGYzMjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzMzMzM4NywiZXhwIjoxNzQzMzQwNTg3fQ.u8nM6dvbyii81g643_pi08pXxTzLOwbJ_boYnI1ou5A
+Content-Type: application/json
+
+###
+DELETE http://localhost:3096/api/users/deleteUser HTTP/1.1
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5MjgwYjBkYmMyNTViYzIxZGYzMjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzMzMzM4NywiZXhwIjoxNzQzMzQwNTg3fQ.u8nM6dvbyii81g643_pi08pXxTzLOwbJ_boYnI1ou5A
+Content-Type: application/json
