@@ -15,12 +15,12 @@ const createItem = async (req, res) => {
         req = matchedData(req);
         const password = await encrypt(req.password);
         const body = {...req, password};
-        const dataUser = await UserModel.create(body);
-        dataUser.set('password', undefined, {strict: false});
+        const user = await UserModel.create(body);
+        user.set('password', undefined, {strict: false});
 
         const data = {
-            user: dataUser,
-            token: await tokenSign(dataUser)
+            user: user,
+            token: await tokenSign(user)
         }
         res.send(data)
     }catch(err){
@@ -129,15 +129,9 @@ const updateUserPersonalData = async (req, res) => {
   try {
     const { companyName, cif, address, phone, isFreelance } = req.body;
 
-    // 🔍 Ver exactamente qué llega
-    console.log("⚠️ BODY recibido:", req.body);
-    console.log("companyName:", companyName);
-    console.log("cif:", cif);
-    console.log("address:", address);
-    console.log("phone:", phone);
-
+    
     if (!companyName || !cif || !address || !phone) {
-      console.log("❌ Faltan Campos Obligatorios");
+      console.log(" Faltan Campos Obligatorios");
       return res.status(400).json({ message: "Faltan Campos Obligatorios" });
     }
 
@@ -159,11 +153,53 @@ const updateUserPersonalData = async (req, res) => {
 
     res.status(200).json({ message: "Datos de empresa actualizados" });
   } catch (err) {
-    console.error("❌ Error en onboarding empresa:", err);
+    console.error(" Error en onboarding empresa:", err);
     res.status(500).json({ message: "Error interno" });
+  }
+};
+
+const getUser = async (req, res) => {
+  try{
+    if(!req.user || !req.user._id) 
+      return res.status(401).json({ message: "Token inválido o expirado" });
+      const user = await UserModel.findById(req.user._id)
+      user.set('password', undefined, { strict: false });
+      if(!user) return res.status(404).json({ message: "Usuario no encontrado" });
+
+      res.send({ data: user });
+  }catch(err){
+    console.log(err)
+    handleHttpError(res, "ERROR_GET_USER")
+  }
+}
+
+const deleteUser = async (req, res) => {
+  try {
+    if (req.query.soft !== "false") {
+      user = await UserModel.findByIdAndUpdate(
+        req.user._id,
+        { deleted: true },
+        { new: true }
+      );
+      user.set('password', undefined, { strict: false });
+      
+      return res.status(200).json({
+        message: "Usuario marcado como eliminado correctamente (soft)",
+        data: user,
+      });
+    } else {
+      user = await UserModel.deleteOne({ _id: req.user._id });
+      return res.status(200).json({
+        message: "Usuario eliminado correctamente (hard)",
+        data: user,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    handleHttpError(res, "ERROR_DELETE_USER");
   }
 };
 
 
 
-module.exports = {createItem, userLogin, validateEmailCode,updateUserPersonalData,updateUserCompanyData}
+module.exports = {createItem, userLogin, validateEmailCode,updateUserPersonalData,updateUserCompanyData, getUser, deleteUser};

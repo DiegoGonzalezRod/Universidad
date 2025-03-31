@@ -7,7 +7,7 @@ const {  createItem } = require("../controllers/storage")
 /**
  * Crear Item
  */
-UserRouter.post("/", uploadMiddleware.single("image"), createItem)
+UserRouter.patch("/", uploadMiddleware.single("image"), createItem)
 
 
 module.exports = UserRouter;

@@ -3,6 +3,8 @@ const {createItem} = require('../controllers/users');
 const {userLogin} = require('../controllers/users');
 const {updateUserPersonalData } = require('../controllers/users');
 const {updateUserCompanyData } = require('../controllers/users');
+const {getUser} = require('../controllers/users');
+const {deleteUser} = require('../controllers/users');
 const { validatorCreateItem, validatorGetItem } = require("../validators/user");
 const { validateEmailCode } = require('../controllers/users');
 const { validatorVerifyCode } = require('../validators/user');
@@ -13,5 +15,8 @@ userRouter.post('/register', validatorCreateItem, createItem);
 userRouter.post('/login', validatorGetItem, userLogin);
 userRouter.post('/validation', authMiddleware, validatorVerifyCode, validateEmailCode);
 userRouter.patch('/onboardingUser', authMiddleware,updateUserPersonalData); 
-userRouter.patch('/onboardingCompany', authMiddleware,updateUserCompanyData); 
+userRouter.patch('/onboardingCompany', authMiddleware,updateUserCompanyData);
+userRouter.get('/getUser', authMiddleware,getUser); 
+userRouter.delete('/deleteUser', authMiddleware, deleteUser);
+
 module.exports = userRouter
