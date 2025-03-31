@@ -11,9 +11,9 @@ const StorageScheme = new mongoose.Schema(
         }
     },
     {
-        timestamp: true, // TODO createdAt, updatedAt
+        timestamp: true, 
         versionKey: false
     }
 )
 StorageScheme.plugin(mongooseDelete, {overrideMethods: "all"})
-module.exports = mongoose.model("storages", StorageScheme) // Nombre de la colección (o de la tabla en SQL)
+module.exports = mongoose.model("storages", StorageScheme) 
